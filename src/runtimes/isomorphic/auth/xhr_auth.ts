@@ -33,6 +33,9 @@ const ajax: AuthTransport = function(
       xhr.setRequestHeader(headerName, dynamicHeaders[headerName]);
     }
   }
+  if(authOptions.withCredentials != null) {
+    xhr.withCredentials = this.authOptions.withCredentials;
+  }
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {

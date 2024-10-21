@@ -3205,6 +3205,7 @@ class HTTPAuthError extends Error {
 const ajax = function (context, query, authOptions, authRequestType, callback) {
     const xhr = runtime.createXHR();
     xhr.open('POST', authOptions.endpoint, true);
+    xhr.withCredentials = true;
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     for (var headerName in authOptions.headers) {
         xhr.setRequestHeader(headerName, authOptions.headers[headerName]);
@@ -3214,9 +3215,6 @@ const ajax = function (context, query, authOptions, authRequestType, callback) {
         for (var headerName in dynamicHeaders) {
             xhr.setRequestHeader(headerName, dynamicHeaders[headerName]);
         }
-    }
-    if (authOptions.withCredentials != null) {
-        xhr.withCredentials = this.authOptions.withCredentials;
     }
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {

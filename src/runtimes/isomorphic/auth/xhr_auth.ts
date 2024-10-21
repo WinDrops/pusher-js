@@ -21,6 +21,7 @@ const ajax: AuthTransport = function(
 ) {
   const xhr = Runtime.createXHR();
   xhr.open('POST', authOptions.endpoint, true);
+  xhr.withCredentials = true;
 
   // add request headers
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -32,9 +33,6 @@ const ajax: AuthTransport = function(
     for (var headerName in dynamicHeaders) {
       xhr.setRequestHeader(headerName, dynamicHeaders[headerName]);
     }
-  }
-  if(authOptions.withCredentials != null) {
-    xhr.withCredentials = this.authOptions.withCredentials;
   }
 
   xhr.onreadystatechange = function() {
